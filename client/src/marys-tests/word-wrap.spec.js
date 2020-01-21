@@ -2,18 +2,16 @@ const wordWrap = (text, columns) => {
     if (typeof text != 'string') throw new Error('not a string');
     if (typeof columns != 'number') throw new Error('not a number');
 
-
     const rows = [];
     while (text.length > columns) {
         const spaceIndex = text.lastIndexOf(' ', columns);
-        const index = spaceIndex > -1 ? Math.min(spaceIndex, columns) : cc 
+        const index = spaceIndex > -1 ? Math.min(spaceIndex, columns) : columns;
 
         rows.push(text.substring(0, index));
         text = text.substring(index).trim();
     }
 
     rows.push(text);
-
     return rows.join('\n');
 }
 
@@ -40,6 +38,10 @@ describe('word-wrap', () => {
 
     test('{a, 1} => a', () => {
         expect(wordWrap('a', 1)).toEqual('a');
+    })
+
+    test('{aa, 1} => a a', () => {
+        expect(wordWrap('aa', 1)).toEqual('a\na');
     })
 
 });
