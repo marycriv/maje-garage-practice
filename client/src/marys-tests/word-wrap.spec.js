@@ -32,13 +32,9 @@ describe('word-wrap', () => {
         }).toThrow(new Error('not a number'))
     });
 
-    test('automatically prints text shorter than columns', () => {
+    test('automatically prints text shorter than or equal to columns', () => {
         expect(wordWrap('test', 5)).toEqual('test');
     });
-
-    test('{a, 1} => a', () => {
-        expect(wordWrap('a', 1)).toEqual('a');
-    })
 
     test('{aa, 1} => a a', () => {
         expect(wordWrap('aa', 1)).toEqual('a\na');
