@@ -2,11 +2,11 @@ const palindromeChecker = (userInput) => {
     if (typeof userInput != 'string') throw new Error('not a string');
     if (userInput.length <= 0) throw new Error('no empty strings allowed');
 
-    function reverseString(text){return text.toLowerCase().split("").reverse().join("")};
+    function reverseString(text){return text.toLowerCase().replace(/[^a-z]/g, '').split("").reverse().join("")};
 
     const comparedString = reverseString(userInput)
 
-    if (comparedString === userInput.toLowerCase()) { return true }
+    if (comparedString === userInput.toLowerCase().replace(/[^a-z]/g, '')) { return true }
 }
 
 describe('palindrome-tester', () => {
@@ -32,5 +32,9 @@ describe('palindrome-tester', () => {
 
     test('user input reversed is same as user input forward regardless of capitalization', () => {
         expect(palindromeChecker('moM')).toEqual(true)
+    })
+
+    test('user input reversed is same as user input forward regardless of spacing & special characters', () => {
+        expect(palindromeChecker('race !car')).toEqual(true)
     })
 });
