@@ -2,6 +2,9 @@ const palindromeChecker = (userInput) => {
     if (typeof userInput != 'string') throw new Error('not a string');
     if (userInput.length <= 0) throw new Error('no empty strings allowed');
 
+    function reverseString(x){return x.toLowerCase().split("").reverse().join("")};
+
+    if (reverseString(userInput) === userInput) { return true }
 }
 
 describe('palindrome-tester', () => {
@@ -21,4 +24,11 @@ describe('palindrome-tester', () => {
         }).toThrow(new Error('no empty strings allowed'))
     });
 
+    test('user input reversed is same as user input forward', () => {
+        expect(palindromeChecker('mom')).toEqual(true);
+    })
+
+    test('user input reversed is same as user input forward regardless of capitalization', () => {
+        expect(palindromeChecker('moM')).toEqual(true)
+    })
 });
