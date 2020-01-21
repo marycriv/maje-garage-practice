@@ -1,8 +1,8 @@
 {
-  "name": "shopping",
+  "name": "maje-garage-practice",
   "version": "1.0.0",
-  "org": "yourorg",
-  "description": "12 UI Patterns written with React and Node.js",
+  "org": "IBM",
+  "description": "12 UI Patterns written with React and Node.js, edited by Mary, Audrey, Jacky, & Esther",
   "private": true,
   "engines": {
     "node": "^8.11.1"
