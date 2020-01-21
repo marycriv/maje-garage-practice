@@ -1,7 +1,10 @@
 const wordWrap = (stringInput, integerInput) => {
     if (typeof stringInput != 'string') throw new Error('not a string');
-    if (typeof integerInput != 'integer') throw new Error('not an integer');
-    return stringInput, integerInput;
+    if (typeof integerInput != 'number') throw new Error('not a number');
+
+    if (stringInput.length <= integerInput) {
+        return true
+    }
 }
 
 describe('word-wrap', () => {
@@ -11,16 +14,18 @@ describe('word-wrap', () => {
 
     test('throw error if first input is not a string', () => {
         expect(() => {
-            wordWrap(0);
+            wordWrap(0, 0);
         }).toThrow(new Error('not a string'))
     });
 
-    test('throw error if second input is not an integer', () => {
+    test('throw error if second input is not a number', () => {
         expect(() => {
-            wordWrap('test');
-        }).toThrow(new Error('not an integer'))
+            wordWrap('test', 'test');
+        }).toThrow(new Error('not a number'))
     });
 
-
+    test('automatically prints strings shorter than second input', () => {
+        expect(wordWrap('test', 5)).toEqual(true);
+    });
 
 });
