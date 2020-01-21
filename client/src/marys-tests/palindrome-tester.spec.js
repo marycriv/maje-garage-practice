@@ -2,9 +2,11 @@ const palindromeChecker = (userInput) => {
     if (typeof userInput != 'string') throw new Error('not a string');
     if (userInput.length <= 0) throw new Error('no empty strings allowed');
 
-    function reverseString(x){return x.toLowerCase().split("").reverse().join("")};
+    function reverseString(text){return text.toLowerCase().split("").reverse().join("")};
 
-    if (reverseString(userInput) === userInput) { return true }
+    const comparedString = reverseString(userInput)
+
+    if (comparedString === userInput.toLowerCase()) { return true }
 }
 
 describe('palindrome-tester', () => {
