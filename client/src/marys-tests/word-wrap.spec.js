@@ -3,7 +3,7 @@ const wordWrap = (stringInput, integerInput) => {
     if (typeof integerInput != 'number') throw new Error('not a number');
 
     if (stringInput.length <= integerInput) {
-        return true
+        console.log('stringInput');
     }
 }
 
@@ -25,7 +25,7 @@ describe('word-wrap', () => {
     });
 
     test('automatically prints strings shorter than second input', () => {
-        expect(wordWrap('test', 5)).toEqual(true);
+        expect(wordWrap('test', 5)).toEqual(console.log('stringInput'));
     });
 
 });
