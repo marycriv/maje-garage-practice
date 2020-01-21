@@ -1,5 +1,5 @@
-const farenheitToCelcius = () => {
-    return 0;
+const farenheitToCelcius = (degreesFarenheit) => {
+    return (degreesFarenheit - 32) * 5 / 9;
 }
 
 describe('farenheit-to-celsius', () => {
@@ -12,6 +12,6 @@ describe('farenheit-to-celsius', () => {
     });
 
     test('212 degrees farenheit is 100 degrees celsius', () => {
-        expect(farenheitToCelcius(212).toEqual(100));
+        expect(farenheitToCelcius(212)).toEqual(100);
     });
 });
