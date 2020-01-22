@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import SimpleList from "../pattern-components/SimpleList";
+import ShoppingList from "../components/ShoppingList";
 import BasicPage from "../pattern-components/BasicPage";
 import "../pattern-components/patterns.scss";
 
 class UIShellBody extends Component {
   components = {
-    "Simple List": SimpleList,
+    "Shopping List": ShoppingList,
     "Basic Page": BasicPage
   };
   defaultComponent = "Basic Page";
@@ -16,6 +16,8 @@ class UIShellBody extends Component {
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
+        <input type="text" placeholder="Item..."></input>
+        <input type="button" value="Add Item"></input>
       </div>
     );
   }
