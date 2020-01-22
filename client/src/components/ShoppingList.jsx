@@ -13,11 +13,92 @@ import Header from "../pattern-components/Header";
 import "../pattern-components/patterns.scss";
 
 class ShoppingList extends Component {
+  title = 'Table List';
+  subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
+
+  // columns = ['Owner', 'ListName', 'Item', 'Quantity', 'Aisle', 'Need'];
+  // formatters = {
+  //   'ZipCode': function(val) {
+  //     return val + '-0000';
+  //   }
+  // };
+
+  // data = [
+  //   {
+  //     Owner: "Karen",
+  //     ListName: "List One",
+  //     Item: "Orange",
+  //     Quantity: "2",
+  //     Aisle: "4",
+  //     Need: false
+  //   },
+  //   {
+  //     Owner: "Karen",
+  //     ListName: "List One",
+  //     Item: "Banana",
+  //     Quantity: "3",
+  //     Aisle: "7",
+  //     Need: true
+  //   },
+  //   {
+  //     Owner: "Karen",
+  //     ListName: "List Two",
+  //     Item: "Soda",
+  //     Quantity: "1",
+  //     Aisle: "14",
+  //     Need: true
+  //   }
+  // ];
+
+  columns = ['Name', 'Address', 'City', 'State', 'ZipCode', 'Country'];
+  formatters = {
+    'ZipCode': function(val) {
+      return val + '-0000';
+    }
+  };
+
+  data = [
+    {
+      Name: "Lin",
+      Address: "123 Main Street",
+      City: "Austin",
+      State: "TX",
+      ZipCode: "12345",
+      Country: "United States"
+    },
+    {
+      Name: "Mak",
+      Address: "45 2nd Street",
+      City: "Austin",
+      State: "TX",
+      ZipCode: "78766",
+      Country: "United States"
+    },
+    {
+      Name: "Joe",
+      Address: "40 Down Street",
+      City: "San Francisco",
+      State: "CA",
+      ZipCode: "90706",
+      Country: "United States"
+    }
+  ];
+
+
+
   constructor(props) {
     super(props);
     this.state = {
-      selectedRow: 0
+      data: [],
+      selectedRow: 0,
     };
+  }
+
+  async componentDidMount() {
+
+    this.setState({
+      data: this.data,
+    })
   }
 
   onRowClick = id => {
@@ -43,21 +124,27 @@ class ShoppingList extends Component {
             />
           </StructuredListCell>
         </div>
+        {this.columns.map(col => {
+          const format = this.formatters[col] || function(val) { return val; };
 
-        <StructuredListCell className="simple-list-row">
-          {row}
-        </StructuredListCell>
+          return (
+            <StructuredListCell key={col} className="simple-list-row">
+              {format(row[col])}
+            </StructuredListCell>
+          );
+        })}
       </StructuredListRow>
     );
   };
 
   render() {
-    const data = ["row1", "row2", "row3"];
+    const data = this.state.data;
+
     return (
       <div className="bx--grid pattern-container">
         <Header
-          title="Shopping List"
-          subtitle="This pattern will display an array of model objects in a simple list column list."
+          title={this.title}
+          subtitle={this.subtitle}
         />
         <div className="bx--row">
           <div className="bx--col-xs-12">
@@ -65,9 +152,14 @@ class ShoppingList extends Component {
               <StructuredListHead>
                 <StructuredListRow head>
                   <StructuredListCell head />
-                  <StructuredListCell head>
-                    Shopping List Title
-                  </StructuredListCell>
+                  {this.columns.map(key => {
+                    return (
+                      <StructuredListCell head key={key}>
+                        {key.charAt(0).toUpperCase() +
+                          key.slice(1).replace(/([A-Z])/g, " $1")}
+                      </StructuredListCell>
+                    );
+                  })}
                 </StructuredListRow>
               </StructuredListHead>
 
@@ -79,7 +171,6 @@ class ShoppingList extends Component {
             </StructuredListWrapper>
           </div>
         </div>
-        
       </div>
     );
   }

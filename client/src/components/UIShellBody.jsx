@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import ShoppingList from "../components/ShoppingList";
+import ShoppingListsMenu from "./ShoppingListsMenu";
+import ShoppingList from "./ShoppingList";
 import BasicPage from "../pattern-components/BasicPage";
 import "../pattern-components/patterns.scss";
 
 class UIShellBody extends Component {
   components = {
+    "Shopping Lists Menu": ShoppingListsMenu,
     "Shopping List": ShoppingList,
     "Basic Page": BasicPage
   };
@@ -16,6 +18,7 @@ class UIShellBody extends Component {
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
+        <ShoppingList />
         <input type="text" placeholder="Item..."></input>
         <input type="button" value="Add Item"></input>
       </div>
