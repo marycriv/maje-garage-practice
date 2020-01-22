@@ -16,41 +16,7 @@ class ShoppingList extends Component {
   title = 'Table List';
   subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
 
-  // columns = ['Owner', 'ListName', 'Item', 'Quantity', 'Aisle', 'Need'];
-  // formatters = {
-  //   'ZipCode': function(val) {
-  //     return val + '-0000';
-  //   }
-  // };
-
-  // data = [
-  //   {
-  //     Owner: "Karen",
-  //     ListName: "List One",
-  //     Item: "Orange",
-  //     Quantity: "2",
-  //     Aisle: "4",
-  //     Need: false
-  //   },
-  //   {
-  //     Owner: "Karen",
-  //     ListName: "List One",
-  //     Item: "Banana",
-  //     Quantity: "3",
-  //     Aisle: "7",
-  //     Need: true
-  //   },
-  //   {
-  //     Owner: "Karen",
-  //     ListName: "List Two",
-  //     Item: "Soda",
-  //     Quantity: "1",
-  //     Aisle: "14",
-  //     Need: true
-  //   }
-  // ];
-
-  columns = ['Name', 'Address', 'City', 'State', 'ZipCode', 'Country'];
+  columns = ['Item', 'Quantity', 'Owner', 'ListName', 'Aisle', 'Need'];
   formatters = {
     'ZipCode': function(val) {
       return val + '-0000';
@@ -59,32 +25,30 @@ class ShoppingList extends Component {
 
   data = [
     {
-      Name: "Lin",
-      Address: "123 Main Street",
-      City: "Austin",
-      State: "TX",
-      ZipCode: "12345",
-      Country: "United States"
+      Item: "Banana",
+      Quantity: "2",
+      Owner: "Karen",
+      ListName: "List One",
+      Aisle: "4",
+      Need: false
     },
     {
-      Name: "Mak",
-      Address: "45 2nd Street",
-      City: "Austin",
-      State: "TX",
-      ZipCode: "78766",
-      Country: "United States"
+      Item: "Orange",
+      Quantity: "1",
+      Owner: "Karen",
+      ListName: "List One",
+      Aisle: "7",
+      Need: true
     },
     {
-      Name: "Joe",
-      Address: "40 Down Street",
-      City: "San Francisco",
-      State: "CA",
-      ZipCode: "90706",
-      Country: "United States"
+      Item: "Soda",
+      Quantity: "1",
+      Owner: "Karen",
+      ListName: "List Two",
+      Aisle: "14",
+      Need: true
     }
   ];
-
-
 
   constructor(props) {
     super(props);
@@ -94,7 +58,7 @@ class ShoppingList extends Component {
     };
   }
 
-  async componentDidMount() {
+async componentDidMount() {
 
     this.setState({
       data: this.data,
