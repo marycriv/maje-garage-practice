@@ -109,7 +109,7 @@ async componentDidMount() {
             </StructuredListCell>
           ); 
         })}
-        <input type="checkbox" checked={this.state.data[id].Need === "Yes" ? true : false} onChange={(e) => this.handleChange(e, `${id}`)}></input>
+        <input type="checkbox" data-testid={`checkbox-test-${id}`} checked={this.state.data[id].Need === "Yes" ? true : false} onChange={(e) => this.handleChange(e, `${id}`)}></input>
       </StructuredListRow>
       
     );
