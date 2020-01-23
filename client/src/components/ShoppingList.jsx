@@ -12,6 +12,8 @@ import { iconCheckmarkSolid } from "carbon-icons";
 import Header from "../pattern-components/Header";
 import "../pattern-components/patterns.scss";
 
+
+
 class ShoppingList extends Component {
   title = 'Table List';
   subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
@@ -69,6 +71,7 @@ async componentDidMount() {
     return (
       <StructuredListRow key={id}  data-testid={`item-test-${id}`} onClick={() => this.onRowClick(id)}>
         <div>
+          
           <StructuredListInput
             id={`row-${id}`}
             value="row-0"
@@ -92,7 +95,9 @@ async componentDidMount() {
             </StructuredListCell>
           );
         })}
+        <input type="checkbox" checked="true" onChange={console.log("bepis")}></input>
       </StructuredListRow>
+      
     );
   };
 
