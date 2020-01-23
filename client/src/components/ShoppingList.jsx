@@ -16,42 +16,35 @@ class ShoppingList extends Component {
   title = 'Table List';
   subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
 
-  columns = ['Item', 'Quantity', 'Owner', 'ListName', 'Aisle', 'Need'];
-  formatters = {
-    'ZipCode': function(val) {
-      return val + '-0000';
-    }
-  };
+  columns = ['Item', 'Size', 'Comment'];
 
   data = [
     {
       Item: "Banana",
-      Quantity: "2",
       Owner: "Karen",
       ListName: "List One",
-      Aisle: "4",
-      Need: false
+      Size: "One bunch",
+      Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home."
     },
     {
       Item: "Orange",
-      Quantity: "1",
       Owner: "Karen",
       ListName: "List One",
-      Aisle: "7",
-      Need: true
+      Size: "Softball",
+      Comment: "Extra pulp"
     },
     {
       Item: "Soda",
-      Quantity: "1",
       Owner: "Karen",
       ListName: "List Two",
-      Aisle: "14",
-      Need: true
+      Size: "64 pack",
+      Comment: "Diet Coke"
     }
   ];
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       data: [],
       selectedRow: 0,
@@ -89,7 +82,7 @@ async componentDidMount() {
           </StructuredListCell>
         </div>
         {this.columns.map(col => {
-          const format = this.formatters[col] || function(val) { return val; };
+          const format = this[col] || function(val) { return val; };
 
           return (
             <StructuredListCell key={col} className="simple-list-row">
@@ -127,7 +120,7 @@ async componentDidMount() {
                 </StructuredListRow>
               </StructuredListHead>
 
-              <StructuredListBody>
+              <StructuredListBody data-testid="body">
                 {data.map((row, i) => {
                   return this.renderRow(row, i);
                 })}
