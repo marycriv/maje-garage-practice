@@ -20,7 +20,7 @@ describe('list has owner, item, quantity, aisle, and need columns', () => {
         const value = render(<ShoppingList />);
         const item = value.getAllByTestId("item-test-0-Need");
         // console.log(item.getElementByKey('Item'));
-        console.log(item[0].innerHTML)
+        expect(item[0].innerHTML).toEqual("Yes")
         // expect(item.length).toBe(3);
     });
 

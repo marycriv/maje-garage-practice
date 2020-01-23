@@ -25,7 +25,7 @@ class ShoppingList extends Component {
       ListName: "List One",
       Size: "One bunch",
       Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home.", 
-      Need: false
+      Need: "Yes"
     },
     {
       Item: "Orange",
@@ -33,7 +33,7 @@ class ShoppingList extends Component {
       ListName: "List One",
       Size: "Softball",
       Comment: "Extra pulp", 
-      Need: false
+      Need: "Yes"
     },
     {
       Item: "Soda",
@@ -41,7 +41,7 @@ class ShoppingList extends Component {
       ListName: "List Two",
       Size: "64 pack",
       Comment: "Diet Coke", 
-      Need: false
+      Need: "Yes"
     }
   ];
 
@@ -86,9 +86,7 @@ async componentDidMount() {
         </div>
         {this.columns.map(col => {
           const format = this[col] || function(val) { return val; };
-          console.log(col);
           return (
-
             <StructuredListCell key={col} data-testid={`item-test-${id}-${col}`} className="simple-list-row">
               {format(row[col])}
             </StructuredListCell>
