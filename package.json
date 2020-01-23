@@ -30,8 +30,11 @@
   "author": "IBM Garage for Cloud",
   "license": "ISC",
   "dependencies": {
-    "client": "file:./client",
     "body-parser": "^1.17.2",
+    "carbon-components": "^10.9.2",
+    "carbon-components-react": "^7.9.2",
+    "carbon-icons": "^7.0.7",
+    "client": "file:./client",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
     "express-http-proxy": "^1.6.0",
