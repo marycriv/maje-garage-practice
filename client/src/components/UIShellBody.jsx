@@ -57,7 +57,8 @@ class UIShellBody extends Component {
     if(item && size && comment) {
       const row = {"Item": item, "Size": size, "Comment": comment};
       const newList = this.state.items.push(row);
-      this.setState({newItem: newList});
+      this.items = newList;
+      this.setState({items: newList});
     }
     
     event.target[2].value = event.target[1].value = event.target[0].value = null;
@@ -68,15 +69,16 @@ class UIShellBody extends Component {
   render() {
     let curScreen = this.defaultComponent;
     const PatternName = this.components[curScreen];
+    const state = this.state || {items: this.items};
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
-        <ShoppingList items={this.items}/>
+        <ShoppingList items={state.items}/>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Item..."></input>
-          <input type="text" placeholder="Size..." ></input>
-          <input type="text" placeholder="Comment..." ></input>
-          <input type="submit" value="Submit" />
+          <input type="text" placeholder="Item..." data-testid="item-input"></input>
+          <input type="text" placeholder="Size..." data-testid="size-input"></input>
+          <input type="text" placeholder="Comment..." data-testid="comment-input"></input>
+          <input type="submit" value="Submit" data-testid="submit-button"></input>
         </form>
       </div>
     );
