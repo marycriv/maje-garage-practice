@@ -6,55 +6,79 @@ import "../pattern-components/patterns.scss";
 
 class UIShellBody extends Component {
   constructor(props) {
-    super(props); 
-    this.state = {
-      itemName: "",
-      quantity: 4,
-      owner: "Karen",
-      listName: "List Two",
-      aisle: "14",
-      need: true,
-      size: "Large",
-      comment: ""
-    }  
+    super(props);   
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
+
+  items = [
+    {
+      Item: "Banana",
+      Owner: "Karen",
+      ListName: "List One",
+      Size: "One bunch",
+      Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home."
+    },
+    {
+      Item: "Orange",
+      Owner: "Karen",
+      ListName: "List One",
+      Size: "Softball",
+      Comment: "Extra pulp"
+    },
+    {
+      Item: "Soda",
+      Owner: "Karen",
+      ListName: "List Two",
+      Size: "64 pack",
+      Comment: "Diet Coke"
+    }
+  ];
 
   components = {
     "Shopping Lists Menu": ShoppingListsMenu,
     "Shopping List": ShoppingList,
     "Basic Page": BasicPage
   };
+  
   defaultComponent = "Basic Page";
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-    //console.log(event);
+  async componentDidMount() {
+    this.setState({
+      items: this.items,
+    })
   }
 
   handleSubmit(event) {
     const item = event.target[0].value;
-    this.setState({itemName: item}, () => alert(event));
-    event.preventDefault();
-    //console.log(event);
+    const size = event.target[1].value;
+    const comment = event.target[2].value;
 
+    if(item && size && comment) {
+      const row = {"Item": item, "Size": size, "Comment": comment};
+      const newList = this.state.items.push(row);
+      this.items = newList;
+      this.setState({items: newList});
+    }
+    
+    event.target[2].value = event.target[1].value = event.target[0].value = null;
+    
+    event.preventDefault();
   }
 
   render() {
     let curScreen = this.defaultComponent;
     const PatternName = this.components[curScreen];
+    const state = this.state || {items: this.items};
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
-        <ShoppingList props={this.state}/>
+        <ShoppingList items={state.items}/>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Item..." onChange={this.handleChange}></input>
-          <input type="text" placeholder="Size..." onChange={this.handleChange}></input>
-          <input type="text" placeholder="Comment..." onChange={this.handleChange}></input>
-          <input type="submit" value="Submit" />
+          <input type="text" placeholder="Item..." data-testid="item-input"></input>
+          <input type="text" placeholder="Size..." data-testid="size-input"></input>
+          <input type="text" placeholder="Comment..." data-testid="comment-input"></input>
+          <input type="submit" value="Submit" data-testid="submit-button"></input>
         </form>
       </div>
     );

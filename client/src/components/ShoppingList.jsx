@@ -21,6 +21,7 @@ class ShoppingList extends Component {
 
   columns = ['Item', 'Size', 'Comment', 'Need'];
 
+
   data = [
     {
       Item: "Banana",
@@ -51,11 +52,12 @@ class ShoppingList extends Component {
     }
   ];
 
+
   constructor(props) {
     super(props);
 
     this.state = {
-      data: [],
+      data: props.items,
       selectedRow: 0,
       checkbox: false
     };
@@ -73,13 +75,6 @@ class ShoppingList extends Component {
       console.log('id: ', id, 'this: ', this.state.data[id].Need, 'checkbox: ', this.state.checkbox);
     });
     
-  }
-
-async componentDidMount() {
-
-    this.setState({
-      data: this.data,
-    })
   }
 
   onRowClick = id => {
@@ -120,41 +115,50 @@ async componentDidMount() {
     );
   };
 
-  render() {
-    const data = this.state.data;
+render() {
+  const data = this.state.data;
 
-    return (
-      <div className="bx--grid pattern-container">
-        <Header
-          title={this.title}
-          subtitle={this.subtitle}
-        />
-        <div className="bx--row">
-          <div className="bx--col-xs-12">
-            <StructuredListWrapper selection border>
-              <StructuredListHead>
-                <StructuredListRow head>
-                  <StructuredListCell head />
-                  {this.columns.map(key => {
-                    return (
-                      <StructuredListCell head key={key}>
-                        {key.charAt(0).toUpperCase() +
-                          key.slice(1).replace(/([A-Z])/g, " $1")}
-                      </StructuredListCell>
-                    );
-                  })}
-                </StructuredListRow>
-              </StructuredListHead>
+
+  // Delete later, when create backend
+  if(this.state.newItem && this.state.newItem[0] !== null) data.push(this.state.newItem);
+  
+  return (
+    <div className="bx--grid pattern-container">
+      <Header
+        title={this.title}
+        subtitle={this.subtitle}
+      />
+      <div className="bx--row">
+        <div className="bx--col-xs-12">
+          <StructuredListWrapper selection border>
+            <StructuredListHead>
+              <StructuredListRow head>
+                <StructuredListCell head />
+                {this.columns.map(key => {
+                  return (
+                    <StructuredListCell head key={key}>
+                      {key.charAt(0).toUpperCase() +
+                        key.slice(1).replace(/([A-Z])/g, " $1")}
+                    </StructuredListCell>
+                  );
 
               <StructuredListBody data-testid="body">
                 {data.map((row, i) => {
                   return this.renderRow(row, i, data[i].Need);
+
                 })}
-              </StructuredListBody>
-            </StructuredListWrapper>
-          </div>
+              </StructuredListRow>
+            </StructuredListHead>
+
+            <StructuredListBody data-testid="body">
+              {data.map((row, i) => {
+                return this.renderRow(row, i);
+              })}
+            </StructuredListBody>
+          </StructuredListWrapper>
         </div>
       </div>
+    </div>
     );
   }
 }
