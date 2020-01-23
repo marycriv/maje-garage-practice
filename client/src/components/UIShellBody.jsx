@@ -8,8 +8,20 @@ class UIShellBody extends Component {
   constructor(props) {
     super(props); 
     this.state = {
-      itemName: ""
+      itemName: "",
+      quantity: 4,
+      owner: "Karen",
+      listName: "List Two",
+      aisle: "14",
+      need: true,
+      size: "Large",
+      comment: ""
     }  
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+    console.log("asdfa")
   }
 
   components = {
@@ -21,12 +33,15 @@ class UIShellBody extends Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
+    //console.log(event);
   }
 
   handleSubmit(event) {
-    event.preventDefault();
     const item = event.target[0].value;
-    this.setState({itemName: item});
+    this.setState({itemName: item}, () => alert(event));
+    event.preventDefault();
+    //console.log(event);
+
   }
 
   render() {
@@ -35,9 +50,11 @@ class UIShellBody extends Component {
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
-        <ShoppingList />
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <input type="text" placeholder="Item..."></input>
+        <ShoppingList props={this.state}/>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="Item..." onChange={this.handleChange}></input>
+          <input type="text" placeholder="Size..." onChange={this.handleChange}></input>
+          <input type="text" placeholder="Comment..." onChange={this.handleChange}></input>
           <input type="submit" value="Submit" />
         </form>
       </div>

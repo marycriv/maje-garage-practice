@@ -10,7 +10,7 @@ class BasicPage extends Component {
   render() {
     return (
       <div className="bx--grid pattern-container">
-        <Header title="Basic Page" subtitle="A basic boilerplate page." />
+        <Header title="Family Shopping List" subtitle="Shopping made easy." />
       </div>
     );
   }
