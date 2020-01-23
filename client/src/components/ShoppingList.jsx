@@ -27,7 +27,7 @@ class ShoppingList extends Component {
       ListName: "List One",
       Size: "One bunch",
       Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home.", 
-      Need: "Yes"
+      Need: "No"
     },
     {
       Item: "Orange",
@@ -35,7 +35,7 @@ class ShoppingList extends Component {
       ListName: "List One",
       Size: "Softball",
       Comment: "Extra pulp", 
-      Need: "Yes"
+      Need: "No"
     },
     {
       Item: "Soda",
@@ -43,7 +43,7 @@ class ShoppingList extends Component {
       ListName: "List Two",
       Size: "64 pack",
       Comment: "Diet Coke", 
-      Need: "Yes"
+      Need: "No"
     }
   ];
 

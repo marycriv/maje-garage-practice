@@ -16,12 +16,14 @@ describe('list has owner, item, quantity, aisle, and need columns', () => {
         expect(column.children.length).toBe(3);
     });
 
-    test('need successfully changes to true', () => {
+    test('need successfully successfully renders on page', () => {
         const value = render(<ShoppingList />);
         const item = value.getAllByTestId("item-test-0-Need");
-        // console.log(item.getElementByKey('Item'));
-        expect(item[0].innerHTML).toEqual("Yes")
-        // expect(item.length).toBe(3);
+        expect(item[0].innerHTML).toEqual("No")
+    });
+
+    test('need successfully changes to true', () => {
+        // synthetic event
     });
 
 });
