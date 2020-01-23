@@ -28,7 +28,8 @@ class ShoppingList extends Component {
       ListName: "List One",
       Size: "One bunch",
       Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home.", 
-      Need: "No"
+      Need: "No",
+      checked: false
     },
     {
       Item: "Orange",
@@ -36,7 +37,8 @@ class ShoppingList extends Component {
       ListName: "List One",
       Size: "Softball",
       Comment: "Extra pulp", 
-      Need: "Yes"
+      Need: "Yes",
+      checked: true
     },
     {
       Item: "Soda",
@@ -44,7 +46,8 @@ class ShoppingList extends Component {
       ListName: "List Two",
       Size: "64 pack",
       Comment: "Diet Coke", 
-      Need: "No"
+      Need: "No",
+      checked: false
     }
   ];
 
@@ -62,8 +65,10 @@ class ShoppingList extends Component {
 
   handleChange(event, id) {
     this.state.data[id].Need = this.state.data[id].Need === "Yes" ? "No" : "Yes";
+    this.state.data[id].checked = !this.state.data[id].checked
     this.setState({ 
-      checkbox: !this.state.checkbox
+      checkbox: !this.state.checkbox,
+      
      }, () => {
       console.log('id: ', id, 'this: ', this.state.data[id].Need, 'checkbox: ', this.state.checkbox);
     });
@@ -109,7 +114,7 @@ async componentDidMount() {
             </StructuredListCell>
           ); 
         })}
-        <input type="checkbox" data-testid={`checkbox-test-${id}`} checked={this.state.data[id].Need === "Yes" ? true : false} onChange={(e) => this.handleChange(e, `${id}`)}></input>
+        <input type="checkbox" data-testid={`checkbox-test-${id}`} checked={this.state.data[id].checked} onChange={(e) => this.handleChange(e, `${id}`)}></input>
       </StructuredListRow>
       
     );
