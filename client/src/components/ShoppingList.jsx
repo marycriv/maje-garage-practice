@@ -18,44 +18,13 @@ class ShoppingList extends Component {
 
   columns = ['Item', 'Size', 'Comment'];
 
-  data = [
-    {
-      Item: "Banana",
-      Owner: "Karen",
-      ListName: "List One",
-      Size: "One bunch",
-      Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home."
-    },
-    {
-      Item: "Orange",
-      Owner: "Karen",
-      ListName: "List One",
-      Size: "Softball",
-      Comment: "Extra pulp"
-    },
-    {
-      Item: "Soda",
-      Owner: "Karen",
-      ListName: "List Two",
-      Size: "64 pack",
-      Comment: "Diet Coke"
-    }
-  ];
-
   constructor(props) {
     super(props);
-    console.log(props);
+
     this.state = {
-      data: [],
+      data: props.items,
       selectedRow: 0,
     };
-  }
-
-async componentDidMount() {
-
-    this.setState({
-      data: this.data,
-    })
   }
 
   onRowClick = id => {
@@ -94,41 +63,44 @@ async componentDidMount() {
     );
   };
 
-  render() {
-    const data = this.state.data;
+render() {
+  const data = this.state.data;
 
-    return (
-      <div className="bx--grid pattern-container">
-        <Header
-          title={this.title}
-          subtitle={this.subtitle}
-        />
-        <div className="bx--row">
-          <div className="bx--col-xs-12">
-            <StructuredListWrapper selection border>
-              <StructuredListHead>
-                <StructuredListRow head>
-                  <StructuredListCell head />
-                  {this.columns.map(key => {
-                    return (
-                      <StructuredListCell head key={key}>
-                        {key.charAt(0).toUpperCase() +
-                          key.slice(1).replace(/([A-Z])/g, " $1")}
-                      </StructuredListCell>
-                    );
-                  })}
-                </StructuredListRow>
-              </StructuredListHead>
-
-              <StructuredListBody data-testid="body">
-                {data.map((row, i) => {
-                  return this.renderRow(row, i);
+  // Delete later, when create backend
+  if(this.state.newItem && this.state.newItem[0] !== null) data.push(this.state.newItem);
+  
+  return (
+    <div className="bx--grid pattern-container">
+      <Header
+        title={this.title}
+        subtitle={this.subtitle}
+      />
+      <div className="bx--row">
+        <div className="bx--col-xs-12">
+          <StructuredListWrapper selection border>
+            <StructuredListHead>
+              <StructuredListRow head>
+                <StructuredListCell head />
+                {this.columns.map(key => {
+                  return (
+                    <StructuredListCell head key={key}>
+                      {key.charAt(0).toUpperCase() +
+                        key.slice(1).replace(/([A-Z])/g, " $1")}
+                    </StructuredListCell>
+                  );
                 })}
-              </StructuredListBody>
-            </StructuredListWrapper>
-          </div>
+              </StructuredListRow>
+            </StructuredListHead>
+
+            <StructuredListBody data-testid="body">
+              {data.map((row, i) => {
+                return this.renderRow(row, i);
+              })}
+            </StructuredListBody>
+          </StructuredListWrapper>
         </div>
       </div>
+    </div>
     );
   }
 }
