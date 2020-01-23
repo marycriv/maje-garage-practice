@@ -3,7 +3,6 @@
         <img src="https://landscape.cncf.io/logos/ibm-member.svg" height="100" alt="IBM Cloud">
     </a>
 </p>
-
 <p align="center">
     <a href="https://cloud.ibm.com">
     <img src="https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg" alt="IBM Cloud">

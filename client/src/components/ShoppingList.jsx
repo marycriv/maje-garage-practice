@@ -12,11 +12,46 @@ import { iconCheckmarkSolid } from "carbon-icons";
 import Header from "../pattern-components/Header";
 import "../pattern-components/patterns.scss";
 
+
+
 class ShoppingList extends Component {
+
   title = 'Table List';
   subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
 
-  columns = ['Item', 'Size', 'Comment'];
+  columns = ['Item', 'Size', 'Comment', 'Need'];
+
+
+  data = [
+    {
+      Item: "Banana",
+      Owner: "Karen",
+      ListName: "List One",
+      Size: "One bunch",
+      Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home.", 
+      Need: "No",
+      checked: false
+    },
+    {
+      Item: "Orange",
+      Owner: "Karen",
+      ListName: "List One",
+      Size: "Softball",
+      Comment: "Extra pulp", 
+      Need: "Yes",
+      checked: true
+    },
+    {
+      Item: "Soda",
+      Owner: "Karen",
+      ListName: "List Two",
+      Size: "64 pack",
+      Comment: "Diet Coke", 
+      Need: "No",
+      checked: false
+    }
+  ];
+
 
   constructor(props) {
     super(props);
@@ -24,17 +59,33 @@ class ShoppingList extends Component {
     this.state = {
       data: props.items,
       selectedRow: 0,
+      checkbox: false
     };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event, id) {
+    this.state.data[id].Need = this.state.data[id].Need === "Yes" ? "No" : "Yes";
+    this.state.data[id].checked = !this.state.data[id].checked
+    this.setState({ 
+      checkbox: !this.state.checkbox,
+      
+     }, () => {
+      console.log('id: ', id, 'this: ', this.state.data[id].Need, 'checkbox: ', this.state.checkbox);
+    });
+    
   }
 
   onRowClick = id => {
     this.setState({ selectedRow: id });
   };
 
-  renderRow = (row, id) => {
+  renderRow = (row, id, needValue) => {
     return (
-      <StructuredListRow key={id} onClick={() => this.onRowClick(id)}>
+      <StructuredListRow key={id}  data-testid={`item-test-${id}`} onClick={() => this.onRowClick(id)}>
         <div>
+          
           <StructuredListInput
             id={`row-${id}`}
             value="row-0"
@@ -52,19 +103,21 @@ class ShoppingList extends Component {
         </div>
         {this.columns.map(col => {
           const format = this[col] || function(val) { return val; };
-
           return (
-            <StructuredListCell key={col} className="simple-list-row">
+            <StructuredListCell key={col} data-testid={`item-test-${id}-${col}`} className="simple-list-row">
               {format(row[col])}
             </StructuredListCell>
-          );
+          ); 
         })}
+        <input type="checkbox" data-testid={`checkbox-test-${id}`} checked={this.state.data[id].checked} onChange={(e) => this.handleChange(e, `${id}`)}></input>
       </StructuredListRow>
+      
     );
   };
 
 render() {
   const data = this.state.data;
+
 
   // Delete later, when create backend
   if(this.state.newItem && this.state.newItem[0] !== null) data.push(this.state.newItem);
@@ -88,6 +141,11 @@ render() {
                         key.slice(1).replace(/([A-Z])/g, " $1")}
                     </StructuredListCell>
                   );
+
+              <StructuredListBody data-testid="body">
+                {data.map((row, i) => {
+                  return this.renderRow(row, i, data[i].Need);
+
                 })}
               </StructuredListRow>
             </StructuredListHead>
