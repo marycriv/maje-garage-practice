@@ -15,6 +15,7 @@ import "../pattern-components/patterns.scss";
 
 
 class ShoppingList extends Component {
+
   title = 'Table List';
   subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
 
@@ -35,7 +36,7 @@ class ShoppingList extends Component {
       ListName: "List One",
       Size: "Softball",
       Comment: "Extra pulp", 
-      Need: "No"
+      Need: "Yes"
     },
     {
       Item: "Soda",
@@ -53,7 +54,20 @@ class ShoppingList extends Component {
     this.state = {
       data: [],
       selectedRow: 0,
+      checkbox: false
     };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event, id) {
+    this.state.data[id].Need = this.state.data[id].Need === "Yes" ? "No" : "Yes";
+    this.setState({ 
+      checkbox: !this.state.checkbox
+     }, () => {
+      console.log('id: ', id, 'this: ', this.state.data[id].Need, 'checkbox: ', this.state.checkbox);
+    });
+    
   }
 
 async componentDidMount() {
@@ -67,7 +81,7 @@ async componentDidMount() {
     this.setState({ selectedRow: id });
   };
 
-  renderRow = (row, id) => {
+  renderRow = (row, id, needValue) => {
     return (
       <StructuredListRow key={id}  data-testid={`item-test-${id}`} onClick={() => this.onRowClick(id)}>
         <div>
@@ -93,9 +107,9 @@ async componentDidMount() {
             <StructuredListCell key={col} data-testid={`item-test-${id}-${col}`} className="simple-list-row">
               {format(row[col])}
             </StructuredListCell>
-          );
+          ); 
         })}
-        <input type="checkbox" checked="true" onChange={console.log("bepis")}></input>
+        <input type="checkbox" checked={this.state.data[id].Need === "Yes" ? true : false} onChange={(e) => this.handleChange(e, `${id}`)}></input>
       </StructuredListRow>
       
     );
@@ -129,7 +143,7 @@ async componentDidMount() {
 
               <StructuredListBody data-testid="body">
                 {data.map((row, i) => {
-                  return this.renderRow(row, i);
+                  return this.renderRow(row, i, data[i].Need);
                 })}
               </StructuredListBody>
             </StructuredListWrapper>

@@ -13,7 +13,7 @@ describe('list has owner, item, quantity, aisle, and need columns', () => {
     test('every row represents a list', () => {
         const value = render(<ShoppingList />);
         const column = value.getByTestId("body");
-        expect(column.children.length).toBe(3);
+        expect(column.children.length).toBe(3); 
     });
 
     test('need successfully successfully renders on page', () => {
