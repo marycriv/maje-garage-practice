@@ -17,21 +17,27 @@ class UIShellBody extends Component {
       Owner: "Karen",
       ListName: "List One",
       Size: "One bunch",
-      Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home."
+      Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home.",
+      Need: "No",
+      checked: false
     },
     {
       Item: "Orange",
       Owner: "Karen",
       ListName: "List One",
       Size: "Softball",
-      Comment: "Extra pulp"
+      Comment: "Extra pulp",
+      Need: "Yes",
+      checked: true
     },
     {
       Item: "Soda",
       Owner: "Karen",
       ListName: "List Two",
       Size: "64 pack",
-      Comment: "Diet Coke"
+      Comment: "Diet Coke",
+      Need: "No",
+      checked: false
     }
   ];
 

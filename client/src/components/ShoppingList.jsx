@@ -140,18 +140,13 @@ render() {
                       {key.charAt(0).toUpperCase() +
                         key.slice(1).replace(/([A-Z])/g, " $1")}
                     </StructuredListCell>
-                  );
-
-              <StructuredListBody data-testid="body">
-                {data.map((row, i) => {
-                  return this.renderRow(row, i, data[i].Need);
-
-                })}
-              </StructuredListRow>
+                    );
+                  })}
+                </StructuredListRow>
             </StructuredListHead>
 
             <StructuredListBody data-testid="body">
-              {data.map((row, i) => {
+              {data && data.map((row, i) => {
                 return this.renderRow(row, i);
               })}
             </StructuredListBody>
