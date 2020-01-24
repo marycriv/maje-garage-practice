@@ -42,13 +42,55 @@ describe('list has owner, item, quantity, aisle, and need columns', () => {
 });
 
     test('every row represents a list', () => {
-        const value = render(<ShoppingList />);
-        // const column = value.getByTestId("body");
-        // expect(column.children.length).toBe(3); 
+        const testItems = [
+            {
+              Item: "Banana",
+              Owner: "Beetlejuice",
+              ListName: "List One",
+              Size: "One bunch",
+              Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home.",
+              Need: "No",
+              checked: false
+            },
+            {
+              Item: "Orange Juice",
+              Owner: "Beetlejuice",
+              ListName: "List One",
+              Size: "Regular carton",
+              Comment: "Extra pulp",
+              Need: "Yes",
+              checked: true
+            }
+          ];
+
+        const value = render(<ShoppingList items={testItems} />);
+        const column = value.getByTestId("body");
+        expect(column.children.length).toBe(2); 
     });
 
     test('need column successfully renders on page and toggles', () => {
-        const value = render(<ShoppingList />);
+        const testItems = [
+                {
+                  Item: "Banana",
+                  Owner: "Beetlejuice",
+                  ListName: "List One",
+                  Size: "One bunch",
+                  Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home.",
+                  Need: "No",
+                  checked: false
+                },
+                {
+                  Item: "Orange",
+                  Owner: "Beetlejuice",
+                  ListName: "List One",
+                  Size: "Softball",
+                  Comment: "Extra pulp",
+                  Need: "Yes",
+                  checked: true
+                }
+              ];
+
+        const value = render(<ShoppingList items={testItems} />);
         const item = value.getAllByTestId("item-test-0-Need");
         expect(item[0].innerHTML).toEqual("No");
         
