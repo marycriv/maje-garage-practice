@@ -21,38 +21,6 @@ class ShoppingList extends Component {
 
   columns = ['Item', 'Size', 'Comment', 'Need'];
 
-
-  data = [
-    {
-      Item: "Banana",
-      Owner: "Karen",
-      ListName: "List One",
-      Size: "One bunch",
-      Comment: "A beautiful bunch of ripe banana. Daylight come and me wan' go home.", 
-      Need: "No",
-      checked: false
-    },
-    {
-      Item: "Orange",
-      Owner: "Karen",
-      ListName: "List One",
-      Size: "Softball",
-      Comment: "Extra pulp", 
-      Need: "Yes",
-      checked: true
-    },
-    {
-      Item: "Soda",
-      Owner: "Karen",
-      ListName: "List Two",
-      Size: "64 pack",
-      Comment: "Diet Coke", 
-      Need: "No",
-      checked: false
-    }
-  ];
-
-
   constructor(props) {
     super(props);
 
