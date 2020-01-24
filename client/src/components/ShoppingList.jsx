@@ -92,10 +92,7 @@ render() {
   
   return (
     <div className="bx--grid pattern-container">
-      <Header
-        title={this.title}
-        subtitle={this.subtitle}
-      />
+
       <div className="bx--row">
         <div className="bx--col-xs-12">
           <StructuredListWrapper selection border>
